@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
 header {height: 100px; background-color:#eda8c4;}
-.contents {height: 500px;}
-footer {height: 100px; background-color:#eda8c4;}
+
+#signUpBox {width: 500px; margin: auto; margin-top:150px; margin-bottom: 150px;}
+#signInBox {width: 300px; margin: auto; margin-top:150px; margin-bottom: 150px;}
+
+footer {height: 100px; background-color:#eda8c4; font-size: 25px;}
