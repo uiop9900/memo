@@ -2,7 +2,9 @@ package com.memo.user;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/user")
@@ -24,4 +26,16 @@ public class UserController {
 		return "template/layout";
 	}
 	
+	//form을 이용해서 redirect한다.
+	@PostMapping("/sign_up_for_submit")
+	public String signUpForSubmit(	//로그인 화면으로 리다이렉트 하는 게 이 Controller의 역할.
+			@RequestParam("loginId") String loginId,
+			@RequestParam("name") String name,
+			@RequestParam("password") String password,
+			@RequestParam("email") String email
+			) { 
+		// TODO: DB insert
+		
+		return "redirect:/user/sigh_in_view";
+	}
 }
