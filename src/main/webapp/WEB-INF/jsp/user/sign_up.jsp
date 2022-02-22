@@ -62,7 +62,7 @@ $(document).ready(function(e){
 		
 		
 		if (loginId.length < 4) {
-			//아이디가 4자 미만일때 경고 문구 노출하고 끝낸다.
+			//아이디가 4자 미만일때 경고 문구 노출하고 끝낸다. 
 			$("#idCheckLength").removeClass('d-none');
 			return;
 		}
