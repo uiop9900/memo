@@ -97,7 +97,7 @@ public class UserRestController {
 			HttpSession session = request.getSession();
 			session.setAttribute("userLoginId", user.getLoginId()); //key, 값 - 기억해야할 값을 저장해두기 
 			//-> 정말 필요한것만 저장 sessin의 id값으로 user의 session.setAttribute("userId", user.getId());다른값들을 db에서 꺼내는 식으로 쓴다. 모든 값들을 다 넣으면 안된다.
-			
+			session.setAttribute("userId", user.getId());
 			session.setAttribute("userName", user.getName()); //어디에서든 가져다 사용할수있다.
 		} else {
 			// 로그인 실패 - 에러
