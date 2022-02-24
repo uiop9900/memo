@@ -79,10 +79,13 @@ $(document).ready(function(e){
 				if (data.result == 'success') {
 					alert("메모가 성공적으로 업로드 되었습니다.")
 					location.href="/post/post_list_view";
+				} else {
+					alert(data.errorMessage);
+					location.href="/user/sign_in_view";
 				}
 			}
 			, error: function(e) {
-				alert("메모 저장에 실패했습니다. 관리자에게 문의하세요.");ㄴ
+				alert("메모 저장에 실패했습니다. 관리자에게 문의하세요.");
 			}
 		});
 		

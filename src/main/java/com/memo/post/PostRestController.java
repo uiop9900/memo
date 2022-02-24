@@ -54,7 +54,7 @@ public class PostRestController {
 		}
 
 		// 로그인된 상태 - userId, userLoginId, subject, content, file 보낸다. -> insert요청 (userLoginId는 Bo는 필요하지만 DAO는 안필요해서 DAO까지는 안가도 된다)
-		
+		postBO.addPost(userId, loginId, subject, content, file);
 		
 		return result;
 	}
