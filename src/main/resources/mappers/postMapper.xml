@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.memo.post.dao.PostDAO">
- 	<select id="selectPostList" resultType="com.memo.post.model.Post" >
+ 	<select id="selectPostListByUserId" resultType="com.memo.post.model.Post"  parameterType="int">
  		SELECT 
 	 		`id`
 			,`userId`
@@ -13,8 +13,26 @@
 			,`updatedAt`
 		FROM
 			`post`
+		WHERE 
+			`userId` = #{userId}
 		ORDER BY `id` DESC;
  	</select>
+ 	
+ 	<select id="selectPostByPostId" resultType="com.memo.post.model.Post" parameterType="int">
+ 		SELECT 
+	 		`id`
+			,`userId`
+			,`subject`
+			,`content`
+			,`imagePath`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE 
+			`id` = #{id}
+ 	</select>
+ 	
  	
  	<insert id="insertPost" parameterType="map">
  		INSERT INTO `post`

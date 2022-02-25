@@ -19,7 +19,7 @@
 		<header>
 			<jsp:include page="../include/gnb.jsp" />
 		</header>	
-		<section class="contents">
+		<section class="contents my-5">
 			<jsp:include page="../${viewName}.jsp" /> <%--WEB-INF/jsp 폴더명이 다른걸 서버가 정하는 걸로 --%>
 		</section>
 		<footer>

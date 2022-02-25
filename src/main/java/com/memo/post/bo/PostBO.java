@@ -19,8 +19,12 @@ public class PostBO {
 	@Autowired
 	private FileManagerService fileManager;
 	
-	public List<Post> getPostList() {
-		return postDAO.selectPostList();
+	public List<Post> getPostListByUserId(int userId) {
+		return postDAO.selectPostListByUserId(userId);
+	}
+	
+	public Post getPostByPostId(int postId) {
+		return postDAO.selectPostByPostId(postId);
 	}
 	
 	public void addPost(int userId, String userLoginId, String subject, String content, MultipartFile file) {//Bo입장으로 생각하기 -> userId 필수임 => int
@@ -36,5 +40,6 @@ public class PostBO {
 		postDAO.insertPost(userId, subject, content, imagePath);
 		
 	}
+	
 	
 }
