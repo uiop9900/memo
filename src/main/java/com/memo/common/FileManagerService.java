@@ -19,9 +19,9 @@ public class FileManagerService {
 		// 파일 디렉토리 경로 예: uiop9900_4257864557/sun.png (timestamp -> int 변환)
 		// 파일명이 겹치지않게 하기위해서 현재시간을 경로에 붙여준다.
 		
-		String directoryName = userLoginId + "_" + System.currentTimeMillis() + "/"; 
+		String directoryName = userLoginId + "_" + System.currentTimeMillis() + "/"; //uiop9900_4257864557/
 		String filePath = FILE_UPLOAD_PATH + directoryName;
-		//D:\\이지아\\6_spring-project\\memo\\workspace\\images/  uiop9900_4257864557/sun.png 이거때문에 /붙인것임
+		//D:\\이지아\\6_spring-project\\memo\\workspace\\images/  uiop9900_4257864557/ 이거때문에 /붙인것임
 		
 		// 디렉초리 만들기(폴더 만들기)
 		File directory = new File(filePath);//기본제공하는 file기본 class
