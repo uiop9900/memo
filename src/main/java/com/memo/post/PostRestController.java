@@ -24,14 +24,6 @@ public class PostRestController {
 	@Autowired
 	private PostBO postBO;
 	
-	//테스트용 컨트롤러
-	@RequestMapping("/posts")
-	public List<Post> posts(){
-		List<Post> postList = postBO.getPostList();
-		return postList;
-		
-	}
-	
 	@PostMapping("/create")
 	public Map<String, Object> create(
 			@RequestParam("subject") String subject,

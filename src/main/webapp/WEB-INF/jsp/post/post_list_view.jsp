@@ -18,7 +18,7 @@
 				<c:forEach var="post" items="${postList}">
 				<tr>
 					<th>${post.id}</th>
-					<th>${post.subject}</th>
+					<th><a href="/post/post_detail_view?postId=${post.id}" >${post.subject}</a></th>
 					<th>
 						<fmt:formatDate value="${post.createdAt}"  pattern="yyyy-MM-dd HH:mm:ss"/>
 					</th>
