@@ -56,6 +56,7 @@ $(document).ready(function(e){
 			if ($.inArray(ext, ['jpg', 'gif', 'png', 'jpeg']) == -1) {//array이 안에 포함되어있나?/ 파라1: 보고자하는 확장자, 파라2: array -> 없으면 -1 반환한다.
 				alert("gif, png, jpg, jepg 파일만 업로드 할 수 있습니다.");
 				$("#file").val(""); // 파일을 비운다.
+				return;
 			}
 		}		
 		

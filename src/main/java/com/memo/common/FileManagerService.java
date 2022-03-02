@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Component //스프링빈-> autowired로 실행가능
 public class FileManagerService {
 
-	public final static String FILE_UPLOAD_PATH = "D:\\이지아\\6_spring-project\\memo\\workspace\\images/"; //상수일때는 대문자로 메소드명, 꼭 마지막 /로!
+	public final static String FILE_UPLOAD_PATH = "C:\\JiaLEE\\6_spring-project\\memo\\imagePath/"; //상수일때는 대문자로 메소드명, 꼭 마지막 /로!
 	
 	// 파일을 받아서 경로로 리턴한다.
 	public String savefile(String userLoginId, MultipartFile file) { //사용자에 따라 user별으의 폴더가 생긴다.
@@ -47,4 +47,33 @@ public class FileManagerService {
 	}
 	
 	
+	// 삭제하는 메소드
+	// input: 경로값(imagePath), output:void
+	public void deleteFile(String imagePath) {
+		// imagePath의 /images/uiop9900_4257864557/sun.png의 /images/를 제거한 path를 실제 저장경로 뒤에 붙인다.
+		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", ""));
+		
+		if (Files.exists(path)) { //이미지 파일이 있으면 삭제 - 없는 거 예외처리
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+				e.printStackTrace();// 로깅해준다.
+			}
+		}
+		//디렉토리(폴더) 삭제
+		path = path.getParent(); //이미지의 부모 = 폴더
+		if (Files.exists(path)) { //폴더가 있으면 삭제한다.
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	
 }
+
+
+
+
