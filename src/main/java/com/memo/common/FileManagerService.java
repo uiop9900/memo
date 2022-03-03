@@ -49,16 +49,12 @@ public class FileManagerService {
 	
 	// 삭제하는 메소드
 	// input: 경로값(imagePath), output:void
-	public void deleteFile(String imagePath) {
+	public void deleteFile(String imagePath) throws IOException {
 		// imagePath의 /images/uiop9900_4257864557/sun.png의 /images/를 제거한 path를 실제 저장경로 뒤에 붙인다.
 		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", ""));
 		
 		if (Files.exists(path)) { //이미지 파일이 있으면 삭제 - 없는 거 예외처리
-			try {
-				Files.delete(path);
-			} catch (IOException e) {
-				e.printStackTrace();// 로깅해준다.
-			}
+			Files.delete(path); //에러발생시, 얘를 부른 BO가 책임진다.
 		}
 		//디렉토리(폴더) 삭제
 		path = path.getParent(); //이미지의 부모 = 폴더

@@ -20,7 +20,7 @@
 		
 	
 		<div class="mt-3">
-			<button type="button" id="postDeleteBtn" class="btn btn-secondary float-left">삭제</button>
+			<button type="button" id="postDeleteBtn" class="btn btn-secondary float-left" data-post-id="${post.id}">삭제</button>
 			
 			<div class="float-right">
 				<button type="button" id="postListBtn" class="btn btn-dark">목록</button>
@@ -92,6 +92,30 @@ $(document).ready(function(){
 			}
 		});
 		
+	});
+	
+	
+	//삭제
+	$("#postDeleteBtn").on('click', function(e){
+		let postId = $(this).data("post-id");
+
+		$.ajax({
+			type:"delete"
+			, url: "/post/delete"
+			, data: {'postId':postId}
+			, success: function(data) {
+				if (data.result == 'success') {
+					alert("삭제성공");
+					location.href="/post/post_list_view"
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert("메모를 삭제하는데 실패했습니다. 관리자에게 문의해주세요.");
+			}
+		});
+	
 	});
 });
 </script>

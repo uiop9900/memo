@@ -1,5 +1,6 @@
 package com.memo.post.bo;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -72,13 +73,44 @@ public class PostBO {
 			// 새로 업로드된 이미지가 '성공'하면 기존 이미지 삭제 -> 메모리 잡아먹고 있어서 삭제해야함(단, 기존이미지 있을 경우에)
 			if (post.getImagePath() != null && imagePath != null) { //시존의 이미지가 있으면서 새로 업로드된 이미지가 성공했을떄
 				// 기존 이미지 삭제 - fileManager에서 삭제하는 코드를 만든다.
-				fileManager.deleteFile(post.getImagePath()); //기존의 path이미지를 넣어줘야 한다.
+				try {
+					fileManager.deleteFile(post.getImagePath());//기존의 path이미지를 넣어줘야 한다.
+				} catch (IOException e) {
+					logger.error("[update post] 이미지 삭제 실패" +post.getId() + ", " + post.getImagePath()); //로깅
+					//logger.error("[update post] 이미지 삭제 실패 {}, {} ", post.getId() , post.getImagePath()); //로깅
+					
+				} 
 			}
 		}
 		
 		// DB에서 update한다. - update하는 BO를 또 하나 만들어서 여기로 가지고 올수있다. -> 그렇겐 안한다. 이게 다 하나의 update과정
 		
 		return postDAO.updatePostByUserIdPostId(userId, postId, subject, content, imagePath);
+	}
+	
+	public int deletePostByPostIdUserId(int postId, int userId) {
+		//삭제 전에 게시글을 먼저 가져와본다. (imagePath가 있을수있기때문에)
+		Post post = getPostByPostId(postId);
+		
+		if (post == null) {
+			logger.warn("[delete post] 삭제한 메모가 존재하지 않습니다.");
+			return 0;
+		}
+		
+		//imagePath가 있는 경우, 파일 삭제
+		//삭제시에는 내가 어떤 것들을 삭제하는가, 글만 지우나? 사진도 지우나?
+		if (post.getImagePath() != null) {
+			//기존 이미지 삭제
+			try {
+				fileManager.deleteFile(post.getImagePath());
+			} catch (IOException e) {
+				logger.error("[delete post] 이미지 삭제 실패" +post.getId() + ", " + post.getImagePath()); 
+			}
+		}
+			
+		//DB에서 post 삭제
+		
+		return postDAO.deletePostByUserIdPostId(postId, userId);
 	}
 	
 }

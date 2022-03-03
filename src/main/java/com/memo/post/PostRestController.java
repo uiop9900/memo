@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,6 +59,15 @@ public class PostRestController {
 		return result;
 	}
 	
+	/**
+	 * 글 수정 API
+	 * @param postId
+	 * @param subject
+	 * @param content
+	 * @param file
+	 * @param request
+	 * @return
+	 */
 	@PutMapping("/update")
 	public Map<String, Object> postUpdate(
 			@RequestParam("postId") int postId,
@@ -79,6 +89,29 @@ public class PostRestController {
 			result.put("result", "error");
 			result.put("errorMessage", "메모수정에 실패했습니다.");
 		}
+		
+		return result;
+	}
+	
+	@DeleteMapping("/delete")
+	public Map<String, Object> postDelete(
+			@RequestParam("postId") int postId,
+			HttpServletRequest request
+			) {
+		
+		HttpSession session = request.getSession();
+		int userId = (int)session.getAttribute("userId"); //delete전 이중체크
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("result", "success");
+		
+		int row = postBO.deletePostByPostIdUserId(postId, userId);
+		
+		if (row < 1) {//실패시
+			result.put("result", "error");
+			result.put("errorMessage", "삭제 실패");
+			
+		} 
 		
 		return result;
 	}
