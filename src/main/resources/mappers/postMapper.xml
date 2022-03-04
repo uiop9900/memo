@@ -15,8 +15,42 @@
 			`post`
 		WHERE 
 			`userId` = #{userId}
-		ORDER BY `id` DESC;
+
+		<!-- 3) direction이 null이면 첫페이지 -->
+		<if test="direction == null"> 
+		ORDER BY `id` DESC
+		</if>
+		
+		<!-- 1) direction이 next이면 다음 -->
+		<if test="direction == 'next'">
+			<![CDATA[
+			AND `id` < #{standardId}
+			]]>
+		ORDER BY `id` DESC
+		</if>
+		
+		<!-- 2) direction이 prev이면 이전 -->
+		<if test="direction == 'prev'">
+			<![CDATA[
+			AND `id` > #{standardId}
+			]]>
+		ORDER BY `id` ASC
+		</if>
+		LIMIT ${limit} <!-- #{}은 무조건 따옴표가 붙는다 -> ${}는 따옴표가 안붙음 -->			
  	</select>
+ 	
+ 	<select id="selectPostByUserIdAndSort" parameterType="map" resultType="int">
+ 		SELECT
+ 			`id`
+ 		FROM 
+ 			`post`
+ 		WHERE
+ 			`userId` = #{userId}
+ 		ORDER BY `id` ${sort}
+ 		LIMIT 1;
+ 	</select>
+ 	
+ 	
  	
  	<select id="selectPostByPostId" resultType="com.memo.post.model.Post" parameterType="int">
  		SELECT 

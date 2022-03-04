@@ -10,7 +10,15 @@ import com.memo.post.model.Post;
 
 @Repository
 public interface PostDAO {
-	public List<Post> selectPostListByUserId(int userId);
+	public List<Post> selectPostListByUserId(
+			@Param("userId") int userId, 
+			@Param("direction") String direction, //direction이 null이면 첫페이지
+			@Param("standardId") Integer standardId, 
+			@Param("limit") int limit);
+	
+	public int selectPostByUserIdAndSort(
+			@Param("userId")int userId, 
+			@Param("sort") String sort);
 	
 	public Post selectPostByPostId(int postId);
 	
