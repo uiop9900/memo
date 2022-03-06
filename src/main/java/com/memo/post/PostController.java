@@ -75,8 +75,6 @@ public class PostController {
 		
 		
 		
-		
-		
 		//글목록들이 나와야 하기에 model에 넣어서 보낸다. -> api 필요없음
 		model.addAttribute("postList", postList); //너무 리스트가 커지면 한꺼번에 가져오기 힘들다 -> 페이징
 		model.addAttribute("prevId", prevId);

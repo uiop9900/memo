@@ -42,7 +42,6 @@
 		</div>
 		
 		
-		
 		<div class="float-right mb-5">
 			<a href="/post/post_create_view" class="btn btn-primary">글쓰기</a>
 		</div>
